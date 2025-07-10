@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import 'expo-router/entry';
 import logoET from './assets/et.jpg'
 
 export default function App() {
