@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
 import { Link } from 'expo-router';
 import logoET from '../assets/et.jpg';
 
-export default function App() {
+export default function Index() {
   return (
     <View style={estilos.paiDetodos}>
       <Image source={logoET} style={estilos.logoET} />
@@ -22,16 +22,17 @@ export default function App() {
         placeholderTextColor="#aaa" 
       />
       
-      <TouchableOpacity style={estilos.button}>
-        <Text style={estilos.buttonText}>Entrar</Text>
-      </TouchableOpacity>
+      <Link href="/inicio" style={estilos.button}>
+        <Text style={estilos.buttonText}>Entrar</Text> 
+      </Link>
 
-      {/* Corrigido aqui: rota deve ser com letra minúscula */}
       <Link href="/criarconta" style={estilos.link}>
         Não tem conta? Criar conta.
       </Link>
 
-      <Text style={estilos.link}>Esqueceu a senha?</Text>
+      <Link href="/redefinirsenha" style={estilos.link}>
+        Esqueceu a senha?
+      </Link>
     </View>
   );
 }
@@ -67,7 +68,7 @@ const estilos = StyleSheet.create({
     color: '#000',
   },
   button: {
-    width: '100%',
+    width: '90%',
     height: 50,
     backgroundColor: '#79DA76',
     borderRadius: 8,
@@ -79,6 +80,10 @@ const estilos = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center', 
+    marginBottom: 10
   },
   link: {
     color: '#fff',
