@@ -1,39 +1,51 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import 'expo-router/entry';
-import logoET from './assets/et.jpg'
+import { Link } from 'expo-router';
+import logoET from '../assets/et.jpg';
 
 export default function App() {
   return (
-
-
     <View style={estilos.paiDetodos}>
-<Image source={logoET} style={estilos.logoET} />
-
+      <Image source={logoET} style={estilos.logoET} />
 
       <Text style={estilos.title}>Entrar</Text>
-      <TextInput style={estilos.input} placeholder="E-mail" placeholderTextColor="#aaa" />
-      <TextInput style={estilos.input} placeholder="Senha" secureTextEntry placeholderTextColor="#aaa" />
+      
+      <TextInput 
+        style={estilos.input} 
+        placeholder="E-mail" 
+        placeholderTextColor="#aaa" 
+      />
+      <TextInput 
+        style={estilos.input} 
+        placeholder="Senha" 
+        secureTextEntry 
+        placeholderTextColor="#aaa" 
+      />
+      
       <TouchableOpacity style={estilos.button}>
         <Text style={estilos.buttonText}>Entrar</Text>
       </TouchableOpacity>
-      <Text style={estilos.link}>Não tem conta? Criar conta.</Text>
+
+      {/* Corrigido aqui: rota deve ser com letra minúscula */}
+      <Link href="/criarconta" style={estilos.link}>
+        Não tem conta? Criar conta.
+      </Link>
+
       <Text style={estilos.link}>Esqueceu a senha?</Text>
     </View>
   );
 }
 
-
 const estilos = StyleSheet.create({
-  paiDetodos:{
+  paiDetodos: {
     flex: 1,
     backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    gap: 20,
   },
   logoET: {
-
     borderRadius: 30,
     width: 200,
     height: 200,
@@ -57,7 +69,7 @@ const estilos = StyleSheet.create({
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#69f069',
+    backgroundColor: '#79DA76',
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
