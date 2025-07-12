@@ -1,75 +1,112 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router'; // Importando o router
 import Perfil from '../assets/david.png';
 
 export default function App() {
+  const router = useRouter(); // Inicializando o router
+
   return (
-    <View style={styles.container}>
+    <View style={styles.Paidetodos}>
       <ScrollView contentContainerStyle={styles.content}>
 
-        <View style={styles.profileContainer}>
+        <View style={styles.foto}>
           <Image
-            source={ Perfil }
-            style={styles.profileImage}
+            source={Perfil}
+            style={styles.fotodeperfil}
           />
           <Text style={styles.name}>D a v i d</Text>
         </View>
 
-        <View style={styles.optionBox}>
+        <View style={styles.componentes}>
           <Option label="Troca de Perfil" />
-          <Option label="E-mail" subLabel="dhslima@gmail.com" />
+          <Option label="E-mail" subLabel="dhslima@gmail.com" styles={styles.email} />
           <Option label="Jogos favoritos" />
-          <Option label="Historico de compra" />
+          
+          {/* Option clicável para histórico */}
+          <Option 
+            label="Historico de compra" 
+            onPress={() => router.push('/historicoCompras')} 
+          />
+
           <Option label="Modo Claro" icon={<Feather name="refresh-cw" size={20} color="green" />} />
         </View>
 
-      
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity
+          style={styles.butaoDeSair}
+          onPress={() => router.replace('/')} 
+        >
           <Text style={styles.logoutText}>Sair da conta</Text>
         </TouchableOpacity>
       </ScrollView>
 
-      <View style={styles.bottomMenu}>
-        <Ionicons name="cart" size={24} color="black" />
-        <Ionicons name="home" size={24} color="black" />
+      <View style={styles.icons}>
+        <TouchableOpacity onPress={() => router.push('/carrinho')}>
+          <Ionicons name="cart" size={30} color="black" />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => router.push('/inicio')}>
+          <Ionicons name="home" size={30} color="black" />
+        </TouchableOpacity>
+
         <Image
-          source={ Perfil }
-          style={styles.menuProfile}
+          source={Perfil}
+          style={styles.menuPerfil}
         />
       </View>
     </View>
   );
 }
 
-const Option = ({ label, subLabel, icon }) => (
-  <View style={styles.optionRow}>
-    <View>
-      <Text style={styles.optionLabel}>{label}</Text>
-      {subLabel && <Text style={styles.optionSubLabel}>{subLabel}</Text>}
+// Ajuste no componente Option para aceitar onPress e tornar clicável
+const Option = ({ label, subLabel, icon, onPress }) => {
+  if (onPress) {
+    return (
+      <TouchableOpacity style={styles.iconsbarra} onPress={onPress}>
+        <View>
+          <Text style={styles.optionLabel}>{label}</Text>
+          {subLabel && <Text style={styles.optionSubLabel}>{subLabel}</Text>}
+        </View>
+        {icon ? icon : <Text style={styles.arrow}>{'>'}</Text>}
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <View style={styles.iconsbarra}>
+      <View>
+        <Text style={styles.optionLabel}>{label}</Text>
+        {subLabel && <Text style={styles.optionSubLabel}>{subLabel}</Text>}
+      </View>
+      {icon ? icon : <Text style={styles.arrow}>{'>'}</Text>}
     </View>
-    {icon ? icon : <Text style={styles.arrow}>{'>'}</Text>}
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
+  Paidetodos: {
     flex: 1,
+    justifyContent: 'center',
     backgroundColor: '#111',
+    gap: 10,
   },
   content: {
     padding: 20,
+    gap: 10,
   },
-  profileContainer: {
+  foto: {
     alignItems: 'center',
     marginBottom: 20,
+    gap: 10,
   },
-  profileImage: {
+  fotodeperfil: {
     width: 110,
     height: 110,
     borderRadius: 55,
     borderWidth: 3,
     borderColor: '#fff',
+    gap: 10,
   },
   name: {
     marginTop: 10,
@@ -77,13 +114,18 @@ const styles = StyleSheet.create({
     color: 'white',
     letterSpacing: 4,
   },
-  optionBox: {
-    backgroundColor: '#1e1e1e',
+  componentes: {
+    marginTop: 50,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#111',
     borderRadius: 10,
     padding: 16,
     gap: 16,
   },
-  optionRow: {
+  iconsbarra: {
+    marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -100,7 +142,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
   },
-  logoutButton: {
+  butaoDeSair: {
     marginTop: 30,
     backgroundColor: '#fff',
     paddingVertical: 10,
@@ -113,7 +155,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '600',
   },
-  bottomMenu: {
+  icons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -122,7 +164,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
-  menuProfile: {
+  menuPerfil: {
     width: 30,
     height: 30,
     borderRadius: 15,

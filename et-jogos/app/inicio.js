@@ -2,35 +2,39 @@ import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import logoET from '../assets/et.jpg';
-import Seta from '../assets/seta.png';
 
 export default function Inicio() {
   const router = useRouter();
 
   return (
     <View style={estilos.paiDetodos}>
-      <TouchableOpacity onPress={() => router.back()} style={estilos.setaWrapper}>
-        <Image source={Seta} style={estilos.seta} />
-      </TouchableOpacity>
-
       <Image source={logoET} style={estilos.logoET} />
+      
       <TextInput 
         style={estilos.input} 
         placeholder="Bem-vindo!" 
         placeholderTextColor="#000" 
       />
+
       <TouchableOpacity 
         style={estilos.button}
         onPress={() => router.push('/descricaoJogo')}
       >
-        <Text style={estilos.buttonText}>Próximo</Text>
+        <Text style={estilos.buttonText}>Ver Descrição do Jogo</Text>
       </TouchableOpacity>
 
-       <TouchableOpacity 
+      <TouchableOpacity 
         style={estilos.button}
         onPress={() => router.push('/perfil')}
       >
         <Text style={estilos.buttonText}>Ir para o perfil</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={estilos.button}
+        onPress={() => router.push('/loja')}
+      >
+        <Text style={estilos.buttonText}>Ir para a loja</Text>
       </TouchableOpacity>
     </View>
   );

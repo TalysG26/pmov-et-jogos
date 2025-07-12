@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React from 'react'; 
+import { View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import logoET from '../assets/et.jpg';
 import Seta from '../assets/seta.png';
 
-export default function RedefinirSenha() {
+export default function CriarConta() {
   const router = useRouter();
 
   return (
@@ -14,14 +14,13 @@ export default function RedefinirSenha() {
       </TouchableOpacity>
 
       <Image source={logoET} style={estilos.logoET} />
-      <TextInput style={estilos.input} placeholder="E-mail" secureTextEntry placeholderTextColor="#000" />
-      <TextInput style={estilos.input} placeholder="Codigo" secureTextEntry placeholderTextColor="#000" />
-      <TextInput style={estilos.input} placeholder="Nova senha" secureTextEntry placeholderTextColor="#000" />
-      <TextInput style={estilos.input} placeholder="Repetir nova senha" secureTextEntry placeholderTextColor="#000" />
 
-      <TouchableOpacity onPress={() => router.back('/inicio')}style={estilos.button}>
-        <Text style={estilos.buttonText}>Redefinir Senha</Text>
-      </TouchableOpacity>
+      <TextInput
+        style={estilos.input}
+        placeholder="Historico de Compras"
+        placeholderTextColor="#aaa"
+      />
+   
     </View>
   );
 }
@@ -33,18 +32,25 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
     padding: 20,
-    gap: 15,
+    gap: 25,
   },
   setaWrapper: {
     position: 'absolute',
     top: 30,
     left: 20,
     zIndex: 10,
+    color:'#79DA76',
   },
   seta: {
     width: 60,
     height: 40,
     borderRadius: 10,
+    color:'#79DA76',
+  },
+  logoET: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
   },
   input: {
     width: '100%',
@@ -58,15 +64,11 @@ const estilos = StyleSheet.create({
     fontSize: 16,
     color: '#000',
   },
-  logoET: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
-  },
   button: {
     width: '70%',
     height: 50,
     backgroundColor: '#79DA76',
+    color:'#79DA76',
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',

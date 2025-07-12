@@ -19,9 +19,7 @@ export default function DescricaDojogo() {
         placeholder="Descrição do jogo" 
         placeholderTextColor="#000" 
       />
-      <TouchableOpacity style={estilos.button}>
-        <Text style={estilos.buttonText}>Próximo</Text>
-      </TouchableOpacity>
+  
     </View>
   );
 }
@@ -64,6 +62,17 @@ const estilos = StyleSheet.create({
     marginBottom: 20,
   },
 
-  button: { /* mantém o resto igual */ },
-  buttonText: { /* mantém o resto igual */ },
+  button: {
+    width: '70%',
+    height: 50,
+    backgroundColor: '#79DA76',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#000',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
