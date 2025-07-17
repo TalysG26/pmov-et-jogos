@@ -8,7 +8,7 @@ export default function Index() {
     <View style={estilos.paiDetodos}>
       <Image source={logoET} style={estilos.logoET} />
 
-      <Text style={estilos.title}>Entrar</Text>
+      
       
       <TextInput 
         style={estilos.input} 
@@ -23,14 +23,14 @@ export default function Index() {
       />
       
       <Link href="/inicio" style={estilos.button}>
-        <Text style={estilos.buttonText}>Entrar</Text> 
+        <Text style={estilos.text}>Entrar</Text> 
       </Link>
 
-      <Link href="/criarconta" style={estilos.link}>
+      <Link href="/criarconta" style={estilos.textLink}>
         Não tem conta? Criar conta.
       </Link>
 
-      <Link href="/redefinirsenha" style={estilos.link}>
+      <Link href="/redefinirsenha" style={estilos.textLink}>
         Esqueceu a senha?
       </Link>
     </View>
@@ -55,6 +55,9 @@ const estilos = StyleSheet.create({
   title: {
     fontSize: 24,
     color: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 20,
     fontWeight: 'bold',
   },
@@ -74,18 +77,18 @@ const estilos = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
-  buttonText: {
+  text: {
     color: '#000',
     fontWeight: 'bold',
     fontSize: 18,
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center', 
-    marginBottom: 10
+    marginBottom: 20,
   },
-  link: {
+  textLink: {
     color: '#fff',
     fontSize: 14,
     marginTop: 4,
