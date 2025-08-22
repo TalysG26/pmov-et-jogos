@@ -1,30 +1,51 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, Button } from 'react-native';
 import { Link } from 'expo-router';
-import logoET from '../assets/et.jpg';
+import logoET from '../assets/et.jpg'
+import { auth } from '../firebase.config';
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Index() {
+  const [email, setEmail] = useState('tgfs@aluno.ifal.edu.br');
+  const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      await signInWithEmailAndPassword(auth, email, senha);
+      setLoading(false);
+      router.replace('/home');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode);
+      console.error(errorMessage);
+      setLoading(false);
+    }
+  }
+
   return (
     <View style={estilos.paiDetodos}>
       <Image source={logoET} style={estilos.logoET} />
 
-      
-      
-      <TextInput 
-        style={estilos.input} 
-        placeholder="E-mail" 
-        placeholderTextColor="#aaa" 
+
+
+      <TextInput
+        style={estilos.input}
+        placeholder="E-mail"
+        placeholderTextColor="#aaa"
       />
-      <TextInput 
-        style={estilos.input} 
-        placeholder="Senha" 
-        secureTextEntry 
-        placeholderTextColor="#aaa" 
+
+      <TextInput
+        style={estilos.input}
+        placeholder="Senha"
+        secureTextEntry
+        placeholderTextColor="#aaa"
       />
-      
-      <Link href="/inicio" style={estilos.button}>
-        <Text style={estilos.text}>Entrar</Text> 
-      </Link>
+
+      <Button onPress={handleLogin} loading={loading} style={estilos.button}> Entrar </Button>
 
       <Link href="/criarconta" style={estilos.textLink}>
         Não tem conta? Criar conta.
@@ -85,7 +106,7 @@ const estilos = StyleSheet.create({
     fontSize: 18,
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center', 
+    textAlign: 'center',
     marginBottom: 20,
   },
   textLink: {
