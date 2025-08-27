@@ -1,28 +1,32 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, Button, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import logoET from '../assets/et.jpg'
 import { auth } from '../firebase.config';
+import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Index() {
   const [email, setEmail] = useState('tgfs@aluno.ifal.edu.br');
   const [senha, setSenha] = useState('');
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async () => {
     try {
-      setLoading(true);
-      await signInWithEmailAndPassword(auth, email, senha);
-      setLoading(false);
-      router.replace('/home');
+      
+      const userCredential =  await signInWithEmailAndPassword(auth, email, senha);
+          router.navigate('/inicio');
+      const use = userCredential.user
+      console.log(use)
+      
+
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode);
       console.error(errorMessage);
-      setLoading(false);
+
     }
   }
 
@@ -36,6 +40,8 @@ export default function Index() {
         style={estilos.input}
         placeholder="E-mail"
         placeholderTextColor="#aaa"
+        value={email}
+        onChangeText={a => setEmail(a)}
       />
 
       <TextInput
@@ -43,9 +49,12 @@ export default function Index() {
         placeholder="Senha"
         secureTextEntry
         placeholderTextColor="#aaa"
+        value={senha}
+        onChangeText={a => setSenha(a)}
       />
 
-      <Button onPress={handleLogin} loading={loading} style={estilos.button}> Entrar </Button>
+      <Pressable onPress={handleLogin} style={estilos.button}> Entrar </Pressable>
+
 
       <Link href="/criarconta" style={estilos.textLink}>
         Não tem conta? Criar conta.
