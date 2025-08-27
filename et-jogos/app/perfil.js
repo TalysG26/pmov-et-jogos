@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons, Feather } from '@expo/vector-icons';
-import { useRouter } from 'expo-router'; // Importando o router
+import { useRouter } from 'expo-router'; 
 import Perfil from '../assets/david.png';
 
 export default function App() {
-  const router = useRouter(); // Inicializando o router
+  const router = useRouter(); 
 
   return (
     <View style={styles.Paidetodos}>
@@ -24,13 +24,12 @@ export default function App() {
           <Option label="E-mail" subLabel="dhslima@gmail.com" styles={styles.email} />
           <Option label="Jogos favoritos" />
           
-          {/* Option clicável para histórico */}
           <Option 
             label="Historico de compra" 
             onPress={() => router.push('/historicoCompras')} 
           />
 
-          <Option label="Modo Claro" icon={<Feather name="refresh-cw" size={20} color="green" />} />
+          <Option label="Modo Claro" icon={<Feather name="refresh-cw" size={20} color="#9df7a1" />} />
         </View>
 
         <TouchableOpacity
@@ -59,7 +58,6 @@ export default function App() {
   );
 }
 
-// Ajuste no componente Option para aceitar onPress e tornar clicável
 const Option = ({ label, subLabel, icon, onPress }) => {
   if (onPress) {
     return (
@@ -88,8 +86,9 @@ const styles = StyleSheet.create({
   Paidetodos: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#111',
+    backgroundColor: '#1c1c1c', // fundo igual da TelaInicial
     gap: 10,
+       marginTop: 5, // <<< Faz o header descer mais
   },
   content: {
     padding: 20,
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#111',
+    backgroundColor: '#1c1c1c', // fundo igual da TelaInicial
     borderRadius: 10,
     padding: 16,
     gap: 16,
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   optionLabel: {
-    color: 'green',
+    color: '#9df7a1', // cor igual da barra fixa
     fontSize: 14,
   },
   optionSubLabel: {
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#8FF170',
+    backgroundColor: '#9df7a1', // barra igual da TelaInicial
     paddingVertical: 12,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

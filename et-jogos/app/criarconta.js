@@ -1,11 +1,38 @@
 import React from 'react'; 
-import { View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Image, Text, TouchableOpacity,    } from 'react-native';
 import { useRouter } from 'expo-router';
 import logoET from '../assets/et.jpg';
 import Seta from '../assets/seta.png';
+import { useState } from 'react';
+import { auth } from '../firebase.config';
+import { createUserWithEmailAndPassword} from "firebase/auth";
 
 export default function CriarConta() {
-  const router = useRouter();
+        const [newEmail, newSetEmail] = useState('');
+        const [newSenha, newSetSenha] = useState('');
+        const router = useRouter();
+      
+        const CreateUser = async () => {
+          try {
+            
+            const userCredential =  await createUserWithEmailAndPassword(auth, newEmail, newSenha);
+            router.navigate('/inicio');
+            const use = userCredential.user
+            console.log(use)
+            
+      
+          } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorCode);
+            console.error(errorMessage);
+      
+          }
+        }
+  
+
+  
+
 
   return (
     <View style={estilos.paiDetodos}>
@@ -24,12 +51,16 @@ export default function CriarConta() {
         style={estilos.input}
         placeholder="E-mail"
         placeholderTextColor="#aaa"
+        value={newEmail}
+        onChangeText={a => newSetEmail(a)}
       />
       <TextInput
         style={estilos.input}
         placeholder="Senha"
         placeholderTextColor="#aaa"
         secureTextEntry={true}
+        value={newSenha}
+        onChangeText={a => newSetSenha(a)}
       />
       <TextInput
         style={estilos.input}
@@ -39,7 +70,7 @@ export default function CriarConta() {
 
       <TouchableOpacity 
         style={estilos.button}
-        onPress={() => router.push('/filtragem')} // Navega para filtragem
+        onPress={CreateUser} 
       >
         <Text style={estilos.buttonText}>Criar Conta</Text>
       </TouchableOpacity>     

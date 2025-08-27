@@ -53,7 +53,9 @@ export default function Index() {
         onChangeText={a => setSenha(a)}
       />
 
-      <Pressable onPress={handleLogin} style={estilos.button}> Entrar </Pressable>
+      <Pressable onPress={handleLogin} style={estilos.button}>
+  <Text style={estilos.text}>Entrar</Text>
+</Pressable>
 
 
       <Link href="/criarconta" style={estilos.textLink}>
@@ -108,6 +110,7 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
+    color: '#000'
   },
   text: {
     color: '#000',
@@ -116,7 +119,7 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 3,
   },
   textLink: {
     color: '#fff',
