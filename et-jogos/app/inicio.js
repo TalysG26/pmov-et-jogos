@@ -68,7 +68,7 @@ export default function TelaInicial() {
         </TouchableOpacity>
 
         {/* Vai para Home */}
-        <TouchableOpacity onPress={() => router.push("/")}>
+        <TouchableOpacity onPress={() => router.push("/inicio")}>
           <Ionicons name="home-outline" size={28} color="black" />
         </TouchableOpacity>
 

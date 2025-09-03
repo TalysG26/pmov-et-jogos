@@ -2,10 +2,22 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router'; 
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase.config";
 import Perfil from '../assets/david.png';
 
 export default function App() {
   const router = useRouter(); 
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("Usuário deslogado com sucesso!");
+      router.replace("/"); 
+    } catch (error) {
+      console.error("Erro ao deslogar: ", error);
+    }
+  };
 
   return (
     <View style={styles.Paidetodos}>
@@ -32,9 +44,10 @@ export default function App() {
           <Option label="Modo Claro" icon={<Feather name="refresh-cw" size={20} color="#9df7a1" />} />
         </View>
 
+       
         <TouchableOpacity
           style={styles.butaoDeSair}
-          onPress={() => router.replace('/')} 
+          onPress={handleLogout} 
         >
           <Text style={styles.logoutText}>Sair da conta</Text>
         </TouchableOpacity>
@@ -45,6 +58,7 @@ export default function App() {
           <Ionicons name="cart" size={30} color="black" />
         </TouchableOpacity>
 
+     
         <TouchableOpacity onPress={() => router.push('/inicio')}>
           <Ionicons name="home" size={30} color="black" />
         </TouchableOpacity>
@@ -86,9 +100,8 @@ const styles = StyleSheet.create({
   Paidetodos: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#1c1c1c', // fundo igual da TelaInicial
+    backgroundColor: '#1c1c1c', 
     gap: 10,
-       marginTop: 5, // <<< Faz o header descer mais
   },
   content: {
     padding: 20,
@@ -118,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#1c1c1c', // fundo igual da TelaInicial
+    backgroundColor: '#1c1c1c',
     borderRadius: 10,
     padding: 16,
     gap: 16,
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   optionLabel: {
-    color: '#9df7a1', // cor igual da barra fixa
+    color: '#9df7a1', 
     fontSize: 14,
   },
   optionSubLabel: {
@@ -158,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#9df7a1', // barra igual da TelaInicial
+    backgroundColor: '#9df7a1', 
     paddingVertical: 12,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
