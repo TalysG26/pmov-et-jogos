@@ -8,6 +8,7 @@ import Perfil from '../assets/david.png';
 
 export default function App() {
   const router = useRouter(); 
+  const user = auth.currentUser;
 
   const handleLogout = async () => {
     try {
@@ -28,12 +29,12 @@ export default function App() {
             source={Perfil}
             style={styles.fotodeperfil}
           />
-          <Text style={styles.name}>D a v i d</Text>
+          <Text style={styles.name}> {user.uid}</Text>
         </View>
 
         <View style={styles.componentes}>
           <Option label="Troca de Perfil" />
-          <Option label="E-mail" subLabel="dhslima@gmail.com" styles={styles.email} />
+          <Text tyles={styles.email} > {auth.email}</ Text>
           <Option label="Jogos favoritos" />
           
           <Option 
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#1c1c1c', 
     gap: 10,
+   paddingTop: 20
   },
   content: {
     padding: 20,

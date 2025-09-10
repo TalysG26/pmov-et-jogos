@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router"; // 👈 Importa o router
+import { useRouter } from "expo-router"; 
+import {auth} from "../firebase.config"
 
 import david from '../assets/david.png'
 import ff from '../assets/ff.jpeg'
@@ -16,7 +17,8 @@ import lol from '../assets/lol.jpeg'
 
 
 export default function TelaInicial() {
-  const router = useRouter(); // 👈 Ativa o router
+  const router = useRouter();
+  const user = auth.currentUser;
 
   return (
     <View style={styles.container}>

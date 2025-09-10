@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { View, TextInput, StyleSheet, Image, Text, TouchableOpacity,    } from 'react-native';
+import { Button } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import logoET from '../assets/et.jpg';
 import Seta from '../assets/seta.png';
@@ -10,15 +11,22 @@ import { createUserWithEmailAndPassword} from "firebase/auth";
 export default function CriarConta() {
         const [newEmail, newSetEmail] = useState('');
         const [newSenha, newSetSenha] = useState('');
+        const[loading, setLoading] = useState(false)
         const router = useRouter();
       
         const CreateUser = async () => {
           try {
             
-            const userCredential =  await createUserWithEmailAndPassword(auth, newEmail, newSenha);
+            const use = userCredential.user;
+            const cadastro = CreateUser(newEmail, newSenha)
+           
+         if(cadastro){
+            setLoading(true)
+             await createUserWithEmailAndPassword(auth, newEmail, newSenha);
+            setLoading(false)
             router.navigate('/inicio');
-            const use = userCredential.user
             console.log(use)
+          }
             
       
           } catch (error) {
@@ -30,9 +38,6 @@ export default function CriarConta() {
           }
         }
   
-
-  
-
 
   return (
     <View style={estilos.paiDetodos}>
@@ -72,7 +77,7 @@ export default function CriarConta() {
         style={estilos.button}
         onPress={CreateUser} 
       >
-        <Text style={estilos.buttonText}>Criar Conta</Text>
+        <Button style={estilos.buttonText} CreateUser={'login'}>Criar Conta</Button>
       </TouchableOpacity>     
     </View>
   );

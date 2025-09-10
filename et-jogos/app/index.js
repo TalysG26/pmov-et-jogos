@@ -1,47 +1,47 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet, Image, Button, Pressable } from 'react-native';
-import { Link } from 'expo-router';
-import logoET from '../assets/et.jpg'
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet, Image } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { Button } from 'react-native-paper';
+import logoET from '../assets/et.jpg';
 import { auth } from '../firebase.config';
-import { useState } from 'react';
-import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Index() {
-  const [email, setEmail] = useState('tgfs@aluno.ifal.edu.br');
+  const [email, setEmail] = useState('tgfs1@aluno.ifal.edu.br');
   const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const handleLogin = async () => {
-    try {
-      
-      const userCredential =  await signInWithEmailAndPassword(auth, email, senha);
-          router.navigate('/inicio');
-      const use = userCredential.user
-      console.log(use)
-      
-
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode);
-      console.error(errorMessage);
-
+    if (!email || !senha) {
+      alert("Preencha todos os campos!");
+      return;
     }
-  }
+
+    try {
+      setLoading(true); // ativa o spinner
+      await signInWithEmailAndPassword(auth, email, senha);
+      setLoading(false); // desliga o spinner
+      router.replace('/inicio');
+      console.log("Login realizado com sucesso!");
+    } catch (error) {
+      setLoading(false);
+      alert("Erro ao fazer login. Verifique sua senha ou email.");
+      console.error(error);
+    }
+  };
 
   return (
     <View style={estilos.paiDetodos}>
       <Image source={logoET} style={estilos.logoET} />
-
-
 
       <TextInput
         style={estilos.input}
         placeholder="E-mail"
         placeholderTextColor="#aaa"
         value={email}
-        onChangeText={a => setEmail(a)}
+        onChangeText={setEmail}
       />
 
       <TextInput
@@ -50,13 +50,19 @@ export default function Index() {
         secureTextEntry
         placeholderTextColor="#aaa"
         value={senha}
-        onChangeText={a => setSenha(a)}
+        onChangeText={setSenha}
       />
 
-      <Pressable onPress={handleLogin} style={estilos.button}>
-  <Text style={estilos.text}>Entrar</Text>
-</Pressable>
-
+      <Button
+        mode="contained"
+        onPress={handleLogin}
+        loading={loading}
+        disabled={loading} 
+        style={estilos.button}
+        labelStyle={{ color: "#000", fontWeight: "bold", fontSize: 16 }}
+      >
+        {loading ? "Entrando..." : "Entrar"}
+      </Button>
 
       <Link href="/criarconta" style={estilos.textLink}>
         Não tem conta? Criar conta.
@@ -84,15 +90,6 @@ const estilos = StyleSheet.create({
     height: 200,
     marginBottom: 30,
   },
-  title: {
-    fontSize: 24,
-    color: '#fff',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    fontWeight: 'bold',
-  },
   input: {
     width: '100%',
     height: 50,
@@ -109,17 +106,6 @@ const estilos = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
-    color: '#000'
-  },
-  text: {
-    color: '#000',
-    fontWeight: 'bold',
-    fontSize: 18,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    marginBottom: 3,
   },
   textLink: {
     color: '#fff',
