@@ -1,0 +1,3 @@
+mostrar o nome do usuario 
+
+ <Text style={styles.name}>{user.uid}</Text>

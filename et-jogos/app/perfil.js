@@ -29,7 +29,7 @@ export default function App() {
             source={Perfil}
             style={styles.fotodeperfil}
           />
-          <Text style={styles.name}> {user.uid}</Text>
+          
         </View>
 
         <View style={styles.componentes}>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#1c1c1c', 
     gap: 10,
-   paddingTop: 20
+   paddingTop: 100
   },
   content: {
     padding: 20,

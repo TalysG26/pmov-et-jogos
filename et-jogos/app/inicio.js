@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
   containerLancamentos: {
     alignItems: "center",
     gap: 20,
+    marginBottom: 50,
     padding: 20,
   },
 
